@@ -12,27 +12,34 @@ interface ItemFormProps {
   onSubmit: (values: ItemType) => void
 }
 
+const defaultValues = {
+  itemName: "",
+  quantity: "",
+  weight: "",
+  category: undefined,
+  link: "",
+  storeAddress: "",
+  storePhone: "",
+  pickupAddress: "",
+  pickupPhone: "",
+} as const
+
 export function ItemForm({ onSubmit }: ItemFormProps) {
   const form = useForm<ItemType>({
     resolver: zodResolver(itemFormSchema),
-    defaultValues: {
-      itemName: "",
-      quantity: "",
-      weight: "",
-      category: undefined,
-      link: "",
-      storeAddress: "",
-      storePhone: "",
-      pickupAddress: "",
-      pickupPhone: "",
-    },
+    defaultValues,
   })
 
   const category = form.watch("category")
 
+  const handleSubmit = (values: ItemType) => {
+    onSubmit(values)
+    form.reset(defaultValues)
+  }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         <div className="grid gap-4 md:grid-cols-3">
           <FormField
             control={form.control}

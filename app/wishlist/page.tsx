@@ -28,14 +28,41 @@ export default function WishlistPage() {
   }, [router])
 
   function onAddItem(values: ItemType) {
-    const cleanedValues = {
-      ...values,
-      link: values.link || undefined,
-      storeAddress: values.storeAddress || undefined,
-      storePhone: values.storePhone || undefined,
-      pickupAddress: values.pickupAddress || undefined,
-      pickupPhone: values.pickupPhone || undefined,
+    // Base item with common fields
+    const baseItem = {
+      itemName: values.itemName,
+      quantity: values.quantity,
+      weight: values.weight,
+      category: values.category,
+    } as ItemType
+
+    // Add category-specific fields
+    let cleanedValues = { ...baseItem }
+    
+    switch (values.category) {
+      case "Online":
+        if (values.link?.trim()) {
+          cleanedValues = { ...cleanedValues, link: values.link }
+        }
+        break
+      case "Local Store":
+        if (values.storeAddress?.trim()) {
+          cleanedValues = { ...cleanedValues, storeAddress: values.storeAddress }
+        }
+        if (values.storePhone?.trim()) {
+          cleanedValues = { ...cleanedValues, storePhone: values.storePhone }
+        }
+        break
+      case "Home Pickup":
+        if (values.pickupAddress?.trim()) {
+          cleanedValues = { ...cleanedValues, pickupAddress: values.pickupAddress }
+        }
+        if (values.pickupPhone?.trim()) {
+          cleanedValues = { ...cleanedValues, pickupPhone: values.pickupPhone }
+        }
+        break
     }
+
     setItems((prev) => [...prev, cleanedValues])
   }
 

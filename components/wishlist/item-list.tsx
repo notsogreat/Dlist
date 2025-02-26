@@ -1,4 +1,4 @@
-import { Trash2, ShoppingCart } from "lucide-react"
+import { Trash2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -28,12 +28,20 @@ export function ItemList({ items, onRemoveItem, onSubmit, isSubmitting, submitEr
                     <p className="text-sm text-muted-foreground">
                       Quantity: {item.quantity} • Weight: {item.weight} • Category: {item.category}
                     </p>
-                    {item.category === "Online" && item.link && <p className="text-sm">Link: {item.link}</p>}
-                    {item.category === "Local Store" && item.storeAddress && (
-                      <p className="text-sm">Store: {item.storeAddress}</p>
+                    {item.category === "Online" && item.link && (
+                      <p className="text-sm">Link: {item.link}</p>
                     )}
-                    {item.category === "Home Pickup" && item.pickupAddress && (
-                      <p className="text-sm">Pickup: {item.pickupAddress}</p>
+                    {item.category === "Local Store" && (
+                      <>
+                        {item.storeAddress && <p className="text-sm">Store: {item.storeAddress}</p>}
+                        {item.storePhone && <p className="text-sm">Store Phone: {item.storePhone}</p>}
+                      </>
+                    )}
+                    {item.category === "Home Pickup" && (
+                      <>
+                        {item.pickupAddress && <p className="text-sm">Pickup: {item.pickupAddress}</p>}
+                        {item.pickupPhone && <p className="text-sm">Pickup Phone: {item.pickupPhone}</p>}
+                      </>
                     )}
                   </div>
                   <Button variant="ghost" size="icon" onClick={() => onRemoveItem(index)}>
@@ -49,7 +57,7 @@ export function ItemList({ items, onRemoveItem, onSubmit, isSubmitting, submitEr
             "Submitting..."
           ) : (
             <>
-              <ShoppingCart className="h-5 w-5 mr-2" />
+              <Send className="h-5 w-5 mr-2" />
               Submit Wish List ({items.length} {items.length === 1 ? "item" : "items"})
             </>
           )}
