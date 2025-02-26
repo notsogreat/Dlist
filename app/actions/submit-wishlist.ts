@@ -34,12 +34,28 @@ export async function submitWishlist(wishlist: any) {
       throw new Error(`SMTP verification failed: ${errorMessage}`)
     }
 
+    // Create email content with all user details
+    const emailText = `
+A new wishlist has been submitted with the following details:
+
+User Information:
+----------------
+Name: ${wishlist.userDetails.name}
+Email: ${wishlist.userDetails.email}
+Phone: ${wishlist.userDetails.phone}
+Address: ${wishlist.userDetails.address}
+
+Number of items in wishlist: ${wishlist.items.length}
+
+Please find the complete wishlist attached as an Excel file.
+`
+
     // Send email
     const emailResult = await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_TO,
       subject: "New Wishlist Submission",
-      text: `A new wishlist has been submitted by ${wishlist.userDetails.name} (${wishlist.userDetails.email}). Please find the wishlist attached.`,
+      text: emailText,
       attachments: [
         {
           filename: "wishlist.xlsx",
