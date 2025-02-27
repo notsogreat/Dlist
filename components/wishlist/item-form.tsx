@@ -74,7 +74,7 @@ export function ItemForm({ onSubmit }: ItemFormProps) {
             name="weight"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Weight</FormLabel>
+                <FormLabel>Total Weight</FormLabel>
                 <FormControl>
                   <Input placeholder="e.g., 2 kg" {...field} />
                 </FormControl>

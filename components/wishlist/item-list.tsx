@@ -1,18 +1,33 @@
+import { useState } from "react"
 import { Trash2, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { Textarea } from "@/components/ui/textarea"
 import { ItemType } from "@/types/wishlist"
 
 interface ItemListProps {
   items: ItemType[]
   onRemoveItem: (index: number) => void
-  onSubmit: () => void
+  onSubmit: (feedback?: string) => void
   isSubmitting: boolean
   submitError: string | null
 }
 
 export function ItemList({ items, onRemoveItem, onSubmit, isSubmitting, submitError }: ItemListProps) {
+  const [showFeedbackDialog, setShowFeedbackDialog] = useState(false)
+  const [feedback, setFeedback] = useState("")
+
+  const handleSubmitClick = () => {
+    setShowFeedbackDialog(true)
+  }
+
+  const handleSubmitWithFeedback = () => {
+    setShowFeedbackDialog(false)
+    onSubmit(feedback)
+  }
+
   return (
     <>
       <Separator className="my-6" />
@@ -52,7 +67,7 @@ export function ItemList({ items, onRemoveItem, onSubmit, isSubmitting, submitEr
             </Card>
           ))}
         </div>
-        <Button onClick={onSubmit} className="w-full" size="lg" variant="default" disabled={isSubmitting}>
+        <Button onClick={handleSubmitClick} className="w-full" size="lg" variant="default" disabled={isSubmitting}>
           {isSubmitting ? (
             "Submitting..."
           ) : (
@@ -65,6 +80,33 @@ export function ItemList({ items, onRemoveItem, onSubmit, isSubmitting, submitEr
 
         {submitError && <p className="text-red-500 text-center">{submitError}</p>}
       </div>
+
+      <Dialog open={showFeedbackDialog} onOpenChange={setShowFeedbackDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Share Your Feedback</DialogTitle>
+            <DialogDescription>
+              Before submitting your wishlist, please share any thoughts, suggestions, or special requirements.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <Textarea
+              placeholder="Your feedback (optional)..."
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              className="min-h-[100px]"
+            />
+            <div className="flex justify-end gap-3">
+              <Button variant="outline" onClick={() => setShowFeedbackDialog(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleSubmitWithFeedback} disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Submit Wishlist"}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   )
 } 

@@ -5,9 +5,15 @@ import nodemailer from "nodemailer"
 
 export async function submitWishlist(wishlist: any) {
   try {
-    // Create Excel file
+    // Create Excel file with updated column name
     const workbook = XLSX.utils.book_new()
-    const worksheet = XLSX.utils.json_to_sheet(wishlist.items)
+    // Rename the weight column in the Excel file
+    const items = wishlist.items.map((item: any) => ({
+      ...item,
+      "Total Weight": item.weight,
+      weight: undefined
+    }))
+    const worksheet = XLSX.utils.json_to_sheet(items)
     XLSX.utils.book_append_sheet(workbook, worksheet, "Wishlist")
     const excelBuffer = XLSX.write(workbook, { type: "buffer", bookType: "xlsx" })
 
@@ -44,6 +50,8 @@ Name: ${wishlist.userDetails.name}
 Email: ${wishlist.userDetails.email}
 Phone: ${wishlist.userDetails.phone}
 Address: ${wishlist.userDetails.address}
+Preferred Contact Method: ${wishlist.userDetails.preferredContact}
+${wishlist.userDetails.feedback ? `Feedback: ${wishlist.userDetails.feedback}` : ''}
 
 Number of items in wishlist: ${wishlist.items.length}
 

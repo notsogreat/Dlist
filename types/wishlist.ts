@@ -36,6 +36,8 @@ export interface UserDetails {
   address: string
   phone: string
   email: string
+  preferredContact: "Text" | "WhatsApp" | "Call" | "Email"
+  feedback?: string
 }
 
 export interface WishlistSubmission {

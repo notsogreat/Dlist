@@ -70,11 +70,14 @@ export default function WishlistPage() {
     setItems((prev) => prev.filter((_, i) => i !== index))
   }
 
-  async function onSubmitWishlist() {
+  async function onSubmitWishlist(feedback?: string) {
     setIsSubmitting(true)
     setSubmitError(null)
     try {
-      const result = await submitWishlist({ userDetails, items })
+      const result = await submitWishlist({ 
+        userDetails: { ...userDetails, feedback },
+        items 
+      })
       if (result.success) {
         localStorage.removeItem("userDetails")
         setTimeout(() => {
