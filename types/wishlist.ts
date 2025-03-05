@@ -5,7 +5,7 @@ const baseItemSchema = z.object({
   itemName: z.string().min(2, { message: "Item name is required" }),
   quantity: z.string().min(1, { message: "Quantity is required" }),
   weight: z.string().min(1, { message: "Weight is required" }),
-  category: z.enum(["Local Store", "Online", "Home Pickup"]),
+  category: z.enum(["Local Store", "Online", "Home Pickup", "Catalog"]),
 })
 
 // Category-specific fields

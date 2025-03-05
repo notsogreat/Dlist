@@ -58,6 +58,7 @@ export function ItemList({ items, onRemoveItem, onSubmit, isSubmitting, submitEr
                         {item.pickupPhone && <p className="text-sm">Pickup Phone: {item.pickupPhone}</p>}
                       </>
                     )}
+                    {/* Catalog items don't have any additional fields to display */}
                   </div>
                   <Button variant="ghost" size="icon" onClick={() => onRemoveItem(index)}>
                     <Trash2 className="h-4 w-4" />

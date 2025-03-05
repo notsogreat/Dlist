@@ -100,6 +100,7 @@ export function ItemForm({ onSubmit }: ItemFormProps) {
                   <SelectItem value="Local Store">Local Store</SelectItem>
                   <SelectItem value="Online">Online</SelectItem>
                   <SelectItem value="Home Pickup">Home Pickup</SelectItem>
+                  <SelectItem value="Catalog">Catalog</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
