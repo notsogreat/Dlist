@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ShoppingCart } from "lucide-react"
+import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -25,16 +26,25 @@ const defaultValues = {
 } as const
 
 export function ItemForm({ onSubmit }: ItemFormProps) {
+  const [lastCategory, setLastCategory] = useState<ItemType['category']>("Local Store")
+  
   const form = useForm<ItemType>({
     resolver: zodResolver(itemFormSchema),
-    defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      category: lastCategory
+    },
   })
 
   const category = form.watch("category")
 
   const handleSubmit = (values: ItemType) => {
     onSubmit(values)
-    form.reset(defaultValues)
+    setLastCategory(values.category)
+    form.reset({
+      ...defaultValues,
+      category: values.category
+    })
   }
 
   return (

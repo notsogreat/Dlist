@@ -64,7 +64,6 @@ export default function WishlistPage() {
         }
         break
       case "Catalog":
-        // No additional fields needed for Catalog
         break
     }
 
