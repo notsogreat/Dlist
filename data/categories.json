@@ -1,0 +1,322 @@
+{
+  "categories": [
+    {
+      "id": "electronics",
+      "name": "Electronics",
+      "items": [
+        {
+          "id": "laptop",
+          "name": "Five Seed Mix - Spiced Jaggery",
+          "price": 999.99,
+          "image": "/laptop.jpg",
+          "weight": "2.5 kg",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "phone",
+          "name": "Smartphone",
+          "price": 699.99,
+          "image": "/phone.jpg",
+          "weight": "200 g",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "tablet",
+          "name": "Tablet",
+          "price": 499.99,
+          "image": "/tablet.jpg",
+          "weight": "500 g",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "headphones",
+          "name": "Wireless Headphones",
+          "price": 199.99,
+          "image": "/headphones.jpg",
+          "weight": "250 g",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "smartwatch",
+          "name": "Smart Watch",
+          "price": 299.99,
+          "image": "/smartwatch.jpg",
+          "weight": "50 g",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "camera",
+          "name": "Digital Camera",
+          "price": 799.99,
+          "image": "/camera.jpg",
+          "weight": "1.2 kg",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "gaming-console",
+          "name": "Gaming Console",
+          "price": 499.99,
+          "image": "/gaming-console.jpg",
+          "weight": "3.5 kg",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "speaker",
+          "name": "Bluetooth Speaker",
+          "price": 79.99,
+          "image": "/speaker.jpg",
+          "weight": "800 g",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "keyboard",
+          "name": "Mechanical Keyboard",
+          "price": 129.99,
+          "image": "/keyboard.jpg",
+          "weight": "1.1 kg",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "mouse",
+          "name": "Gaming Mouse",
+          "price": 59.99,
+          "image": "/mouse.jpg",
+          "weight": "120 g",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "monitor",
+          "name": "4K Monitor",
+          "price": 399.99,
+          "image": "/monitor.jpg",
+          "weight": "5.2 kg",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "printer",
+          "name": "All-in-One Printer",
+          "price": 199.99,
+          "image": "/printer.jpg",
+          "weight": "8.5 kg",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "router",
+          "name": "Wi-Fi Router",
+          "price": 89.99,
+          "image": "/router.jpg",
+          "weight": "300 g",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "external-hdd",
+          "name": "External HDD",
+          "price": 79.99,
+          "image": "/external-hdd.jpg",
+          "weight": "200 g",
+          "packSize": "1 unit"
+        },
+        {
+          "id": "webcam",
+          "name": "HD Webcam",
+          "price": 49.99,
+          "image": "/webcam.jpg",
+          "weight": "150 g",
+          "packSize": "1 unit"
+        }
+      ]
+    },
+    {
+      "id": "clothing",
+      "name": "Clothing",
+      "items": [
+        {
+          "id": "shirt",
+          "name": "T-Shirt",
+          "price": 29.99,
+          "image": "/shirt.jpg"
+        },
+        {
+          "id": "jeans",
+          "name": "Jeans",
+          "price": 59.99,
+          "image": "/jeans.jpg"
+        },
+        {
+          "id": "shoes",
+          "name": "Sneakers",
+          "price": 89.99,
+          "image": "/shoes.jpg"
+        },
+        {
+          "id": "jacket",
+          "name": "Denim Jacket",
+          "price": 79.99,
+          "image": "/jacket.jpg"
+        },
+        {
+          "id": "hoodie",
+          "name": "Hoodie",
+          "price": 49.99,
+          "image": "/hoodie.jpg"
+        },
+        {
+          "id": "dress",
+          "name": "Summer Dress",
+          "price": 69.99,
+          "image": "/dress.jpg"
+        },
+        {
+          "id": "sweater",
+          "name": "Knit Sweater",
+          "price": 89.99,
+          "image": "/sweater.jpg"
+        },
+        {
+          "id": "shorts",
+          "name": "Cargo Shorts",
+          "price": 39.99,
+          "image": "/shorts.jpg"
+        },
+        {
+          "id": "boots",
+          "name": "Leather Boots",
+          "price": 129.99,
+          "image": "/boots.jpg"
+        },
+        {
+          "id": "socks",
+          "name": "Athletic Socks",
+          "price": 19.99,
+          "image": "/socks.jpg"
+        },
+        {
+          "id": "hat",
+          "name": "Baseball Cap",
+          "price": 24.99,
+          "image": "/hat.jpg"
+        },
+        {
+          "id": "scarf",
+          "name": "Wool Scarf",
+          "price": 34.99,
+          "image": "/scarf.jpg"
+        },
+        {
+          "id": "gloves",
+          "name": "Winter Gloves",
+          "price": 29.99,
+          "image": "/gloves.jpg"
+        },
+        {
+          "id": "belt",
+          "name": "Leather Belt",
+          "price": 39.99,
+          "image": "/belt.jpg"
+        },
+        {
+          "id": "tie",
+          "name": "Silk Tie",
+          "price": 44.99,
+          "image": "/tie.jpg"
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "name": "Home & Living",
+      "items": [
+        {
+          "id": "bed",
+          "name": "Bed",
+          "price": 799.99,
+          "image": "/bed.jpg"
+        },
+        {
+          "id": "sofa",
+          "name": "Sofa",
+          "price": 599.99,
+          "image": "/sofa.jpg"
+        },
+        {
+          "id": "table",
+          "name": "Coffee Table",
+          "price": 199.99,
+          "image": "/table.jpg"
+        },
+        {
+          "id": "lamp",
+          "name": "Floor Lamp",
+          "price": 89.99,
+          "image": "/lamp.jpg"
+        },
+        {
+          "id": "rug",
+          "name": "Area Rug",
+          "price": 149.99,
+          "image": "/rug.jpg"
+        },
+        {
+          "id": "curtains",
+          "name": "Window Curtains",
+          "price": 79.99,
+          "image": "/curtains.jpg"
+        },
+        {
+          "id": "pillows",
+          "name": "Throw Pillows",
+          "price": 29.99,
+          "image": "/pillows.jpg"
+        },
+        {
+          "id": "mirror",
+          "name": "Wall Mirror",
+          "price": 129.99,
+          "image": "/mirror.jpg"
+        },
+        {
+          "id": "plant",
+          "name": "Indoor Plant",
+          "price": 39.99,
+          "image": "/plant.jpg"
+        },
+        {
+          "id": "vase",
+          "name": "Decorative Vase",
+          "price": 49.99,
+          "image": "/vase.jpg"
+        },
+        {
+          "id": "cushion",
+          "name": "Seat Cushion",
+          "price": 24.99,
+          "image": "/cushion.jpg"
+        },
+        {
+          "id": "blanket",
+          "name": "Throw Blanket",
+          "price": 34.99,
+          "image": "/blanket.jpg"
+        },
+        {
+          "id": "artwork",
+          "name": "Wall Art",
+          "price": 89.99,
+          "image": "/artwork.jpg"
+        },
+        {
+          "id": "storage",
+          "name": "Storage Box",
+          "price": 29.99,
+          "image": "/storage.jpg"
+        },
+        {
+          "id": "candles",
+          "name": "Scented Candles",
+          "price": 19.99,
+          "image": "/candles.jpg"
+        }
+      ]
+    }
+  ]
+}

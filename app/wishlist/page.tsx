@@ -102,8 +102,8 @@ export default function WishlistPage() {
   if (!userDetails) return null
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="flex-1 py-8">
+      <div className="max-w-4xl mx-auto px-4 space-y-6">
         <UserDetailsCard userDetails={userDetails} />
 
         <Card>
