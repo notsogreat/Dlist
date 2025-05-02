@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog"
-import { Menu, Search, ChevronLeft, ChevronRight, Store, Home as HomeIcon, Minus, Plus, Trash2, Scale, Package, Globe, ShoppingCart } from "lucide-react"
+import { Menu, Search, ChevronLeft, ChevronRight, Store, Home as HomeIcon, Minus, Plus, Trash2, Scale, Package, Globe, ShoppingCart, CheckCircle } from "lucide-react"
 import { useState, useMemo, useEffect } from "react"
 import { Banner } from "@/components/banner"
 import categoriesData from "@/data/categories.json"
@@ -20,6 +20,7 @@ import specialOptionsData from "@/data/special-options.json"
 import { Category, SpecialOption, CartItem, CategoriesData, SpecialOptionsData } from "@/types"
 import { LucideIcon } from "lucide-react"
 import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
+import { submitOrder } from "@/app/actions/submit-order"
 
 // Update formSchema to have conditional validation
 const getFormSchema = (selectedOptionId: string | null) => {
@@ -97,11 +98,36 @@ export default function Home() {
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const [cart, setCart] = useState<CartItem[]>([])
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false)
+  const [showOrderConfirmationDialog, setShowOrderConfirmationDialog] = useState(false)
+  const [isOrderSubmitting, setIsOrderSubmitting] = useState(false)
+  const [orderSubmitted, setOrderSubmitted] = useState(false)
   const itemsPerPage = 12
   const [itemQuantities, setItemQuantities] = useState<Record<string, number>>({})
   const [formSchema, setFormSchema] = useState(() => getFormSchema(null));
   const [isSubmitting, setIsSubmitting] = useState(false);
   
+  // Order confirmation form schema
+  const orderFormSchema = z.object({
+    name: z.string().min(1, { message: "Name is required" }),
+    email: z.string().email({ message: "Please enter a valid email address" }),
+    phone: z.string().min(10, { message: "Phone number must be at least 10 digits" }),
+    address: z.string().min(5, { message: "Please enter a valid address" }),
+    preferredContact: z.string().min(1, { message: "Please select a preferred contact method" }),
+    feedback: z.string().optional(),
+  });
+  
+  const orderForm = useForm<z.infer<typeof orderFormSchema>>({
+    resolver: zodResolver(orderFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      preferredContact: "",
+      feedback: "",
+    },
+  });
+
   // Update form schema when selected option changes
   useEffect(() => {
     const schema = getFormSchema(selectedOption?.id || null);
@@ -296,8 +322,51 @@ export default function Home() {
     // Save cart to localStorage
     localStorage.setItem("cart", JSON.stringify(cart))
     
-    // Close the cart drawer
+    // Close the cart drawer and show order confirmation dialog
     setIsCartDrawerOpen(false)
+    setShowOrderConfirmationDialog(true)
+  }
+  
+  const handleOrderSubmit = async (values: z.infer<typeof orderFormSchema>) => {
+    setIsOrderSubmitting(true)
+    try {
+      // Prepare order details
+      const orderDetails = {
+        ...values,
+        cart,
+        orderDate: new Date().toISOString(),
+      }
+      
+      // Submit order to server
+      const result = await submitOrder(orderDetails)
+      
+      if (result?.success) {
+        // Save order details to localStorage
+        localStorage.setItem("orderDetails", JSON.stringify(orderDetails))
+        
+        // Show success state
+        setOrderSubmitted(true)
+        
+        // Clear cart after successful order
+        setCart([])
+        
+        // Close dialog after 3 seconds
+        setTimeout(() => {
+          setShowOrderConfirmationDialog(false)
+          setOrderSubmitted(false)
+          orderForm.reset()
+        }, 3000)
+      } else {
+        // Handle error
+        console.error("Failed to submit order:", result?.message)
+        // You might want to show an error message to the user here
+      }
+    } catch (error) {
+      console.error("Error submitting order:", error)
+      // You might want to show an error message to the user here
+    } finally {
+      setIsOrderSubmitting(false)
+    }
   }
   
   // Calculate total price of items in cart
@@ -812,19 +881,19 @@ export default function Home() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Preferred Contact Method</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
+                        <FormControl>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <SelectTrigger>
                               <SelectValue placeholder="Select preferred contact method" />
                             </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="Text">Text Message</SelectItem>
-                            <SelectItem value="WhatsApp">WhatsApp</SelectItem>
-                            <SelectItem value="Call">Phone Call</SelectItem>
-                            <SelectItem value="Email">Email</SelectItem>
-                          </SelectContent>
-                        </Select>
+                            <SelectContent>
+                              <SelectItem value="Text">Text Message</SelectItem>
+                              <SelectItem value="WhatsApp">WhatsApp</SelectItem>
+                              <SelectItem value="Call">Phone Call</SelectItem>
+                              <SelectItem value="Email">Email</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -967,6 +1036,130 @@ export default function Home() {
           </span>
         </Button>
       )}
+
+      {/* Order Confirmation Dialog */}
+      <Dialog open={showOrderConfirmationDialog} onOpenChange={setShowOrderConfirmationDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Complete Your Order</DialogTitle>
+            <DialogDescription>
+              Please provide your contact information to complete the order.
+            </DialogDescription>
+          </DialogHeader>
+          
+          {!orderSubmitted ? (
+            <Form {...orderForm}>
+              <form onSubmit={orderForm.handleSubmit(handleOrderSubmit)} className="space-y-4">
+                <FormField
+                  control={orderForm.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={orderForm.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email Address</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your email address" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={orderForm.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Number</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your phone number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={orderForm.control}
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Delivery Address</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Enter your delivery address" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={orderForm.control}
+                  name="preferredContact"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Preferred Contact Method</FormLabel>
+                      <FormControl>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select preferred contact method" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Text">Text Message</SelectItem>
+                            <SelectItem value="WhatsApp">WhatsApp</SelectItem>
+                            <SelectItem value="Call">Phone Call</SelectItem>
+                            <SelectItem value="Email">Email</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={orderForm.control}
+                  name="feedback"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Feedback</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Enter any feedback" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button type="submit" className="w-full" disabled={isOrderSubmitting}>
+                  {isOrderSubmitting ? "Submitting..." : "Submit Order"}
+                </Button>
+              </form>
+            </Form>
+          ) : (
+            <div className="flex flex-col items-center justify-center p-6 space-y-4">
+              <CheckCircle className="h-12 w-12 text-green-500" />
+              <h3 className="text-xl font-semibold text-center">Thank you for your order!</h3>
+              <p className="text-center text-muted-foreground">
+                Our team will reach out to you on the provided number or email soon with the delivery date.
+              </p>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
