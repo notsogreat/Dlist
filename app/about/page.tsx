@@ -1,68 +1,68 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Utensils, Clock, MapPin, Sparkles } from "lucide-react"
+import { Package, Globe, Sparkles, Truck } from "lucide-react"
 
 const features = [
   {
-    id: "authentic-cuisine",
-    title: "Authentic Indian Cuisine",
-    icon: Utensils,
+    id: "authentic-products",
+    title: "Authentic Indian Products",
+    icon: Package,
     color: "bg-orange-500",
-    description: "Experience the rich flavors of India with our carefully curated menu",
+    description: "Discover handpicked treasures from India's rich cultural heritage",
     details: [
-      "Handpicked recipes from across India's diverse culinary landscape",
-      "Authentic spices and ingredients sourced directly from India",
-      "Regular menu updates featuring seasonal specialties",
-      "Special dietary accommodations available (vegetarian, vegan, gluten-free)",
-      "Chef's special recommendations for the best experience"
+      "Curated selection of traditional and modern Indian products",
+      "Direct sourcing from Indian artisans and manufacturers",
+      "Quality verification and authenticity checks",
+      "Wide range of categories from clothing to handicrafts",
+      "Regular updates with new arrivals and seasonal collections"
     ],
-    image: "/images/authentic-cuisine.jpg"
+    image: "/images/authentic-products.jpg"
   },
   {
-    id: "fast-delivery",
-    title: "Lightning Fast Delivery",
-    icon: Clock,
+    id: "direct-shipping",
+    title: "Direct from India",
+    icon: Globe,
     color: "bg-blue-500",
-    description: "Get your favorite dishes delivered to your doorstep in under 30 minutes",
+    description: "Straight from Indian artisans to your doorstep",
     details: [
-      "Optimized delivery routes for maximum efficiency",
-      "Real-time order tracking",
-      "Temperature-controlled delivery bags",
-      "Free delivery on orders above $50",
-      "Express delivery options available"
+      "Direct partnerships with Indian sellers and artisans",
+      "No middlemen, ensuring fair prices",
+      "Transparent supply chain",
+      "Support for small businesses and local communities",
+      "Cultural authenticity in every product"
     ],
-    image: "/images/fast-delivery.jpg"
+    image: "/images/direct-shipping.jpg"
   },
   {
-    id: "local-restaurants",
-    title: "Support Local Restaurants",
-    icon: MapPin,
-    color: "bg-green-500",
-    description: "Join us in supporting local Indian restaurants in your neighborhood",
-    details: [
-      "Partnership with family-owned Indian restaurants",
-      "Direct support to local business owners",
-      "Community events and food festivals",
-      "Regular restaurant spotlights and features",
-      "Special promotions for local restaurant partners"
-    ],
-    image: "/images/local-restaurants.jpg"
-  },
-  {
-    id: "premium-quality",
-    title: "Premium Quality Guaranteed",
+    id: "artisan-support",
+    title: "Support Indian Artisans",
     icon: Sparkles,
-    color: "bg-purple-500",
-    description: "Only the finest ingredients and authentic recipes",
+    color: "bg-green-500",
+    description: "Empowering local artisans and preserving traditional crafts",
     details: [
-      "Rigorous quality control standards",
-      "Fresh ingredients daily",
-      "Hygiene and safety certifications",
-      "Regular kitchen inspections",
-      "Customer satisfaction guarantee"
+      "Fair trade practices and ethical sourcing",
+      "Preservation of traditional Indian craftsmanship",
+      "Stories behind the products and their makers",
+      "Community development initiatives",
+      "Sustainable and eco-friendly products"
     ],
-    image: "/images/premium-quality.jpg"
+    image: "/images/artisan-support.jpg"
+  },
+  {
+    id: "reliable-shipping",
+    title: "Fast & Reliable Shipping",
+    icon: Truck,
+    color: "bg-purple-500",
+    description: "Seamless international shipping experience",
+    details: [
+      "Efficient international shipping network",
+      "Real-time tracking for all orders",
+      "Secure packaging and handling",
+      "Free shipping on orders above $100",
+      "Dedicated customer support for shipping queries"
+    ],
+    image: "/images/reliable-shipping.jpg"
   }
 ]
 
@@ -72,7 +72,7 @@ export default function AboutPage() {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">About Winnie</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          We're on a mission to bring the authentic flavors of India to your doorstep while supporting local restaurants and ensuring the highest quality in every dish.
+          We're on a mission to bring authentic Indian products to your doorstep while supporting local artisans and ensuring the highest quality in every purchase.
         </p>
       </div>
 
@@ -113,7 +113,7 @@ export default function AboutPage() {
       <div className="mt-12 text-center">
         <h2 className="text-3xl font-bold mb-4">Our Commitment</h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          At Winnie, we're committed to providing you with the best Indian dining experience while supporting our local community. Every order helps us grow and serve you better.
+          At Winnie, we're committed to bringing you authentic Indian products while supporting local artisans and preserving traditional craftsmanship. Every purchase helps us grow and serve you better.
         </p>
       </div>
     </div>

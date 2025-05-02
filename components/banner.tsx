@@ -3,41 +3,41 @@
 import { useEffect, useState } from "react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Card, CardContent } from "@/components/ui/card"
-import { Utensils, Clock, MapPin, Sparkles, ArrowRight } from "lucide-react"
+import { Package, Truck, Globe, Sparkles, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 const bannerItems = [
   {
-    title: "Discover Authentic Indian Cuisine",
-    description: "Experience the rich flavors of India with our carefully curated menu. Order now and get 20% off on your first order!",
-    icon: Utensils,
+    title: "Authentic Indian Products",
+    description: "Discover handpicked treasures from India - from traditional handicrafts to modern fashion. Shop with confidence!",
+    icon: Package,
     color: "bg-orange-500",
-    cta: "Learn More",
-    link: "/about#authentic-cuisine",
+    cta: "Shop Now",
+    link: "/products",
   },
   {
-    title: "Lightning Fast Delivery",
-    description: "Get your favorite dishes delivered to your doorstep in under 30 minutes. Free delivery on orders above $50!",
-    icon: Clock,
+    title: "Direct from India",
+    description: "Get your favorite Indian products delivered straight from India to your doorstep. No middlemen, just authentic goods!",
+    icon: Globe,
     color: "bg-blue-500",
     cta: "Learn More",
-    link: "/about#fast-delivery",
+    link: "/about#direct-shipping",
   },
   {
-    title: "Support Local Restaurants",
-    description: "Join us in supporting local Indian restaurants in your neighborhood. Every order helps keep our community thriving!",
-    icon: MapPin,
-    color: "bg-green-500",
-    cta: "Learn More",
-    link: "/about#local-restaurants",
-  },
-  {
-    title: "Premium Quality Guaranteed",
-    description: "Only the finest ingredients and authentic recipes. Try our chef's special menu this weekend!",
+    title: "Support Indian Artisans",
+    description: "Every purchase helps support local Indian artisans and small businesses. Make a difference with your shopping!",
     icon: Sparkles,
+    color: "bg-green-500",
+    cta: "Meet Artisans",
+    link: "/artisans",
+  },
+  {
+    title: "Fast & Reliable Shipping",
+    description: "Enjoy quick delivery with real-time tracking. Free shipping on orders above $100!",
+    icon: Truck,
     color: "bg-purple-500",
-    cta: "Learn More",
-    link: "/about#premium-quality",
+    cta: "Shipping Info",
+    link: "/shipping",
   },
 ]
 
