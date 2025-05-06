@@ -36,19 +36,27 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
+    side?: "top" | "right" | "bottom" | "left"
+  }
+>(({ className, children, side = "bottom", ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
+        "fixed z-50 flex flex-col border bg-background",
+        side === "bottom" && "inset-x-0 bottom-0 mt-24 h-auto rounded-t-[10px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
+        side === "right" && "inset-y-0 right-0 h-full w-[300px] rounded-l-[10px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
+        side === "left" && "inset-y-0 left-0 h-full w-[300px] rounded-r-[10px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
+        side === "top" && "inset-x-0 top-0 h-auto rounded-b-[10px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
         className
       )}
       {...props}
     >
-      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+      {side === "bottom" && (
+        <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+      )}
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>

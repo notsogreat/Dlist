@@ -1,0 +1,28 @@
+{
+  "specialOptions": [
+    {
+      "id": "local-store",
+      "name": "Order from Local Store",
+      "description": "Pick up your items from our local store",
+      "iconType": "Store",
+      "price": "$-",
+      "image": "/items/localstore.png"
+    },
+    {
+      "id": "home-pickup",
+      "name": "Pick from My Home",
+      "description": "We'll pick up items from your home",
+      "iconType": "Home",
+      "price": "$-",
+      "image": "/items/homepickup.png"
+    },
+    {
+      "id": "online-order",
+      "name": "Order Online",
+      "description": "We'll order online on your behalf",
+      "iconType": "Online",
+      "price": "$-",
+      "image": "/items/onlineorder.jpg"
+    }
+  ]
+} 
